@@ -1,6 +1,6 @@
 # Belief Protocol | Belief.md Specification
 
-**Version 2.3**
+**Version 1.0**
 
 > A standardized approach to give AI agents a persistent philosophical and ethical operating context.
 
@@ -24,43 +24,6 @@ Throughout: **principal** means the person or organization whose beliefs the fil
 
 ---
 
-## What changed in 2.0
-
-Version 1.x had two unnamed halves. A generated belief file contained a set of *decision surfaces* (how the agent behaves, stylistically) sitting on top of a *worldview* (what the principal believes, and why). The two were related but the relationship was never specified, and neither term had a parent category.
-
-**2.0 names the parent category: Belief Structures.**
-
-A Belief Structure is a *typed lens* on a principal's beliefs. `worldview` and `decision-surface` are no longer top-level sections — they are two recognized structure **types** among several. The model is deliberately class-and-instance: `Belief Structure` is the class, and each type is a subclass with its own required fields and its own operational contract with the agent.
-
-Three practical reasons this matters:
-
-1. **It makes the file diffable at the right grain.** A change to a plausibility structure is a different kind of change than a change to a core doctrinal commitment. v1.x could not tell them apart.
-2. **It resolves the "worldview" objection.** *Worldview* is the market-legible term, but it draws fire for being totalizing — a single frame claiming to account for everything (the post-structuralist critique, downstream of Foucault's power/knowledge). Demoting it to one lens among several is philosophically honest and costs nothing in legibility: a file can still say "worldview" where a reader expects it.
-3. **It gives the agent a place to put things it currently drops.** Belief–behavior gaps, self-binding guardrails, ambient cultural pressure, and the question of *how tightly* a belief is held all have nowhere to live in v1.x. They get types in 2.0.
-
-Backward compatibility: a v1.x file remains valid. A `## Worldview` section is read as a `worldview` structure; the `## Agent Orientations` block is read as the rendered output of a `decision-surface` structure. Migration guide at the end.
-
-## What changed in 2.2
-
-No new structure types. Six corrections, two of them breaking.
-
-1. **Source Language** is now a section of its own, with the vocabulary boundary between the spec's terms and the principal's stated explicitly.
-2. Beliefs carry a `source`, and inferred beliefs move to `OPEN-QUESTIONS.md`.
-3. `conflict-resolution` values are renamed to describe agent behavior rather than endorse a stance, and no longer carry a default.
-4. The operationalization requirement is scoped to the file rather than to every belief, matching 2.0's own split between descriptive and operational structure types.
-5. `web` gains standard second-layer domains, restoring the cross-file consistency that sections 1–8 provided in 1.x.
-6. Worldview question 5 is rephrased so that principals outside a theistic tradition can answer it.
-
-**Breaking, for existing files:**
-
-- **The `conflict-resolution` default is gone.** A file that omits the field used to mean `principles-over-rules`; it now means `surface-and-pause`. Behavior changes with no change to the file. Set the field explicitly rather than inheriting either default — the old one was a default, not a decision.
-- **`source` is now checked.** Files written before 2.2 will not have it. Add it belief by belief; where a belief's wording cannot be traced to the principal, that is information, and the belief belongs in `OPEN-QUESTIONS.md` until it can be.
-
-## What changed in 2.3
-
-2.3 is about getting a belief file to actually run, everywhere. Nothing in the format of `BELIEF.md` changes except one new frontmatter field.
-
-"Loaded always" was a promise the spec made without saying how. On the consumer AI platforms, *always loaded* means one thing: the text pasted into a project's or assistant's instructions field. Those fields are small — a few thousand characters — and anything attached as a file is searched in fragments or opened only when the model decides to. A full belief file doesn't fit, and a belief file that has been cut to fit by hand, or attached and hoped for, fails silently: the agent keeps answering, just without the belief.
 
 1. **The short belief file** (`BELIEF-SHORT.md`) is now part of the spec: the frontmatter and Agent Orientations rendered as plain instructions, at most **4,000 characters**, ending in a link to the full file and a required instruction for what to do when the link can't be opened. See [Short Belief File](#short-belief-file).
 2. **`url`** joins the frontmatter: the plain-text address of the full, compiled file.
@@ -198,7 +161,7 @@ This is not the read-aloud test in the checklist. That one asks whether the prin
 
 ## Universal attributes
 
-Every individual belief inside any structure carries `layer`, `grip` and `warrant`, and records a `source`. These are the highest-value addition in 2.0 — they are what a well-formed belief file has that a list of values does not.
+Every individual belief inside any structure carries `layer`, `grip` and `warrant`, and records a `source`. These are the highest-value addition — they are what a well-formed belief file has that a list of values does not.
 
 ### `layer` — centrality
 
@@ -746,9 +709,6 @@ After building, host `dist/BELIEF-FULL.md` at the `url`, then follow `dist/INSTA
 | `orientations/`                              | Unchanged                                                                                                                                                                                                |
 | `references/`                                | Unchanged; split out `library/` if the principal has a corpus                                                                                                                                             |
 
-**From 2.2 to 2.3:** add `url` to the frontmatter, add `TESTS.md`, and run `tools/belief_build.py`. If the short file comes out over budget, shorten the orientations; if a companion skill calls the belief optional, fix the sentence. Nothing else changes.
-
-Practical migration order: `layer` first (mechanical), then `warrant` (mostly inferable), then `source` (requires going back to the material), then `grip` (requires the principal). `grip` is where a generated file most reliably diverges from a self-described one, which makes it the most useful thing to measure in a generated-versus-authored comparison.
 
 ---
 
