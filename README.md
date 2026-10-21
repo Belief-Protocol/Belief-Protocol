@@ -22,18 +22,160 @@ Where `SKILL.md` encodes *how to do things*, `belief.md` encodes *why things are
 
 Throughout: **principal** means the person or organization whose beliefs the file records. **Compiler** means whoever writes the file — often an agent working from the principal's materials.
 
----
 
 
-1. **The short belief file** (`BELIEF-SHORT.md`) is now part of the spec: the frontmatter and Agent Orientations rendered as plain instructions, at most **4,000 characters**, ending in a link to the full file and a required instruction for what to do when the link can't be opened. See [Short Belief File](#short-belief-file).
+1. **The short belief file** (`BELIEF-SHORT.md`) is now part of the spec: the frontmatter and Agent Orientations rendered as plain instructions, at most **1,500 characters** of the most important material, ending in a link to the full file and a required instruction for what to do when the link can't be opened. See [Short Belief File](#short-belief-file).
 2. **`url`** joins the frontmatter: the plain-text address of the full, compiled file.
 3. **Companion skills** — a skill written to work under one belief — must carry that belief's short file inside them, never refer to the belief as something that may or may not be loaded. See [Companion Skills](#companion-skills).
 4. **Testing** is part of installation. Every packaged belief ships with three tests; a belief that hasn't passed them on a platform isn't installed there. `TESTS.md` is a new optional file for behavioral tests. See [Testing](#testing).
 5. **`tools/belief_build.py`** builds all of this from a belief folder and refuses to build anything incomplete. See [Build Tool](#build-tool).
 
-Not breaking. Existing files stay valid; they need a `url` before they can be packaged.
+Existing files stay valid; they need a `url` before they can be packaged.
+
+## Start here
+
+There are two ways to make a belief file. **Beginner** is hand-written: one page of bullet points you fill in yourself, in about half an hour. **Advanced** is compiled: an agent builds the full file from everything a person has said and written, and keeps it current as their life goes on. Most people should start with the beginner page. It gets you most of the way.
+
+### Beginner — hand-written
+
+For writing down your own beliefs, or your organization's. No tools, no tags, no build.
+
+1. **Copy** the outline below.
+2. **Write** a few bullet points under each heading, in your own words. Skip any heading you have nothing for. Three or four things you really care about is enough. Section 3, Decision Surface, matters most.
+3. **Paste** the whole page into your AI's instructions: a ChatGPT or Claude Project, a Gemini Gem, or a Grok workspace. Keep it under 4,000 characters, about a page.
+4. **Check** it: in a new chat, ask *"What will you do differently because of my beliefs?"* If the answer doesn't come from section 3, paste the page again, all of it.
+
+```markdown
+# My Beliefs
+
+**Name:** 
+
+> Let these beliefs guide everything you do for me.
+> If something isn't covered here, say so instead of guessing.
 
 ---
+
+## 1. Worldview
+_What I believe at the center: what people are, what's true, what's right and wrong, what's beyond us._
+
+- 
+- 
+- 
+
+---
+
+## 2. Web
+_What follows from the center: my views on work, money, family, power, change and purpose._
+
+- 
+- 
+- 
+
+---
+
+## 3. ★ Decision Surface
+_The most important part. How my AI should act because of everything here._
+
+- 
+- 
+- 
+
+---
+
+## 4. Plausibility
+_What I take for granted, and what most people assume that I don't._
+
+- 
+- 
+- 
+
+---
+
+## 5. Formation
+_What forms me: what I love, and the habits, people and places that shape me._
+
+- 
+- 
+- 
+
+---
+
+## 6. Narrative
+_The story I'm living inside: where it started, what changed, where it's going._
+
+- 
+- 
+- 
+
+---
+
+## 7. Dissonance
+_Where what I do doesn't match what I believe yet, and whether my AI should point it out, leave it alone, or help._
+
+- 
+- 
+- 
+
+---
+
+## 8. Boundary
+_My outer limits, and who I trust to set them._
+
+- 
+- 
+- 
+
+---
+
+## 9. Tripwire
+_"If I ever do this, I've lost the thread," and what my AI should do if it sees it._
+
+- 
+- 
+- 
+
+---
+
+## 10. Deep Structure
+_Big pressures in the culture I'm pushing against._
+
+- 
+- 
+- 
+```
+
+The outline is also in [`template/BELIEF.md`](./template/BELIEF.md). Its ten headings are the [registry](#the-registry) of belief structures, in order.
+
+### Advanced — compiled
+
+For capturing a principal's beliefs from a body of work — books, sermons, talks, interviews — or for mapping someone's beliefs over time as they live. An agent does the compiling and the principal reviews it. This is the full specification below: all ten structure types with `layer`, `grip` and `warrant` on every belief, the rules on source language and attribution, `OPEN-QUESTIONS.md`, the coverage report, the short belief file, tests, and companion skills.
+
+1. **Inventory.** [Compiling an inventory](./Instructions%20for%20compiling%20an%20inventory.md): keep everything the principal says, verbatim, with where it came from. The inventory only grows; new material adds records as life goes on.
+2. **Compile.** [Compiling the belief structure](./Instructions%20for%20compiling%20belief%20structure.md): organize the inventory into `BELIEF.md`, then write `TESTS.md`. Recompile from the inventory whenever it has grown.
+3. **Build and install.** Run [`tools/belief_build.py`](#build-tool), publish the full file, paste the short file into each platform, and run the tests.
+4. **Graph** *(optional)*. [Compiling a belief graph](./Instructions_for_compiling_a_belief_graph.md): render the file as a graph.
+
+A hand-written page is a good first record for an inventory. Start beginner, and an agent can take it from there.
+
+|                | Beginner — hand-written | Advanced — compiled |
+| -------------- | ----------------------- | ------------------- |
+| Written by     | The principal, by hand | An agent, from the principal's own words; the principal reviews |
+| Starts from    | The outline above | `INVENTORY.md` |
+| Format         | Ten headings, bullet points | `BELIEF.md` with frontmatter and full structures |
+| `provenance`   | `authored` | `reconstructed`, until the principal confirms it |
+| `layer`, `grip`, `warrant` | Not needed | On every belief; `grip` confirmed with the principal |
+| Stays current  | Edit the page and paste it again | Inventory grows; recompile |
+| Install        | Paste the page into instructions | Build, publish, paste the short file, run the tests |
+| Time           | About half an hour | Hours to compile; ongoing after |
+
+Everything below is the full specification for advanced mode.
+
+---
+
+
+
+
+
 
 ## Directory Structure
 
