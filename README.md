@@ -42,7 +42,7 @@ For writing down your own beliefs, or your organization's. No tools, no tags, no
 
 1. **Copy** the outline below.
 2. **Write** a few bullet points under each heading, in your own words. Skip any heading you have nothing for. Three or four things you really care about is enough. Section 3, Decision Surface, matters most.
-3. **Paste** the whole page into your AI's instructions: a ChatGPT or Claude Project, a Gemini Gem, or a Grok workspace. Keep it under 4,000 characters, about a page.
+3. **Paste** the whole page into your AI's instructions: a ChatGPT or Claude Project, a Gemini Gem, or a Grok workspace. Keep it under 1,500 characters, about a page.
 4. **Check** it: in a new chat, ask *"What will you do differently because of my beliefs?"* If the answer doesn't come from section 3, paste the page again, all of it.
 
 ```markdown
