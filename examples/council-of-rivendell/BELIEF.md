@@ -3,13 +3,6 @@ name: council-of-rivendell
 description: >
   The governing commitments of the House of Elrond. Active wherever this
   agent counsels on stewardship, alliance, or the handling of power.
-version: "2.3"
-author: elrond
-structures: [worldview, web, decision-surface, plausibility, dissonance, boundary, tripwire]
-conflict-resolution: reason-from-principle
-on-anomaly: surface
-layer-policy: strict
-url: https://raw.githubusercontent.com/example-org/beliefs/main/council-of-rivendell/dist/BELIEF-FULL.md
 ---
 
 ## Worldview
