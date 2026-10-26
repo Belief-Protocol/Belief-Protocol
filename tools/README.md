@@ -5,9 +5,11 @@
 
 ```
 python3 tools/belief_build.py path/to/belief-folder --draft     # while drafting
-python3 tools/belief_build.py path/to/belief-folder             # to ship (needs `url` in BELIEF.md)
+python3 tools/belief_build.py path/to/belief-folder             # to ship (needs `url` in library/META.md)
 ```
 
-Then host `dist/BELIEF-FULL.md` at the `url`, and follow `dist/INSTALL.md`, including the tests.
+It writes `BELIEF-SHORT.md` beside `BELIEF.md`, and everything else to `library/dist/`. Then host
+`library/dist/BELIEF-FULL.md` at the `url`, paste `BELIEF-SHORT.md` into each platform, and follow
+`library/dist/INSTALL.md`, including the tests.
 
 Exit codes: `0` built, `1` failed (nothing written), `2` built as a draft (don't install).
