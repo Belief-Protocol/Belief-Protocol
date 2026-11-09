@@ -8,7 +8,6 @@
     />
     <meta name="theme-color" content="#0a2540" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>VirtueOS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,30 +19,75 @@
   </head>
   <body>
     <div id="app">
-      <header class="topchrome" aria-label="VirtueOS reader">
-        <div class="brand">
-          <span class="brand-mark">VirtueOS</span>
-          <span class="brand-app">Reader</span>
+      <section id="import" class="import" aria-label="Import a feed">
+        <div class="import-panel">
+          <p class="kicker">VirtueOS</p>
+          <h1>Turn a feed into a pathway</h1>
+          <p class="import-lead">
+            Paste an RSS or Atom URL, load the sample feed, or open the stub
+            parents pathway. Design is temporary — the conversion loop is the
+            point.
+          </p>
+
+          <label class="field">
+            <span>Feed URL</span>
+            <input
+              id="feed-url"
+              type="url"
+              placeholder="https://example.com/feed.xml"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </label>
+
+          <div class="import-actions">
+            <button type="button" id="btn-import" class="btn primary">
+              Import feed
+            </button>
+            <button type="button" id="btn-sample" class="btn">
+              Sample RSS
+            </button>
+            <button type="button" id="btn-stub" class="btn">
+              Stub pathway JSON
+            </button>
+          </div>
+
+          <p id="import-status" class="import-status" role="status"></p>
         </div>
-        <div id="progress" class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-      </header>
+      </section>
 
-      <main id="feed" class="feed" tabindex="0" aria-label="Pathway feed"></main>
+      <div id="reader" class="reader" hidden>
+        <header class="topchrome" aria-label="VirtueOS reader">
+          <div class="brand">
+            <button type="button" id="btn-back" class="back">Feeds</button>
+            <span class="brand-mark">VirtueOS</span>
+          </div>
+          <div
+            id="progress"
+            class="progress"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </header>
 
-      <aside class="rail" aria-label="Card actions">
-        <button type="button" class="rail-btn" data-action="save" title="Save">
-          <span class="rail-icon" aria-hidden="true">＋</span>
-          <span>Save</span>
-        </button>
-        <button type="button" class="rail-btn" data-action="note" title="Note">
-          <span class="rail-icon" aria-hidden="true">✎</span>
-          <span>Note</span>
-        </button>
-        <button type="button" class="rail-btn" data-action="share" title="Share">
-          <span class="rail-icon" aria-hidden="true">↗</span>
-          <span>Share</span>
-        </button>
-      </aside>
+        <main id="feed" class="feed" tabindex="0" aria-label="Pathway feed"></main>
+
+        <aside class="rail" aria-label="Card actions">
+          <button type="button" class="rail-btn" data-action="save" title="Save">
+            <span class="rail-icon" aria-hidden="true">＋</span>
+            <span>Save</span>
+          </button>
+          <button type="button" class="rail-btn" data-action="note" title="Note">
+            <span class="rail-icon" aria-hidden="true">✎</span>
+            <span>Note</span>
+          </button>
+          <button type="button" class="rail-btn" data-action="share" title="Share">
+            <span class="rail-icon" aria-hidden="true">↗</span>
+            <span>Share</span>
+          </button>
+        </aside>
+      </div>
 
       <div id="toast" class="toast" hidden></div>
     </div>

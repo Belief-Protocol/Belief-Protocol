@@ -1,12 +1,17 @@
-const pathwayUrl = new URL("./pathways/parents-church-ai.json", import.meta.url);
+import { rssToPathway } from "./rss-to-pathway.js";
 
+const importView = document.getElementById("import");
+const readerView = document.getElementById("reader");
 const feed = document.getElementById("feed");
 const progress = document.getElementById("progress");
 const toast = document.getElementById("toast");
+const statusEl = document.getElementById("import-status");
+const feedUrlInput = document.getElementById("feed-url");
 
 let cards = [];
 let activeIndex = 0;
 let toastTimer;
+let railWired = false;
 
 function showToast(message) {
   if (!toast) return;
@@ -26,63 +31,9 @@ function showToast(message) {
   }, 1800);
 }
 
-function renderCard(card, index) {
-  const section = document.createElement("section");
-  section.className = `card ${card.type}`;
-  section.dataset.index = String(index);
-  section.setAttribute("aria-label", `${index + 1} of ${cards.length}`);
-
-  const panel = document.createElement("div");
-  panel.className = "card-panel";
-
-  if (card.type === "cover") {
-    panel.innerHTML = `
-      <span class="kicker">${escapeHtml(card.kicker || "VirtueOS")}</span>
-      <h1>${escapeHtml(card.title)}</h1>
-      <p>${escapeHtml(card.body)}</p>
-      <p class="cta">${escapeHtml(card.cta || "Swipe up")}</p>
-    `;
-  } else if (card.type === "quote") {
-    panel.innerHTML = `
-      <span class="badge">Quote</span>
-      <blockquote>${escapeHtml(card.text)}</blockquote>
-      <cite>${escapeHtml(card.cite || "")}</cite>
-    `;
-  } else if (card.type === "scripture") {
-    panel.innerHTML = `
-      <span class="badge">Scripture</span>
-      <blockquote>${escapeHtml(card.text)}</blockquote>
-      <p class="ref">${escapeHtml(card.ref || "")}</p>
-      ${card.question ? `<p class="ask">${escapeHtml(card.question)}</p>` : ""}
-    `;
-  } else if (card.type === "question") {
-    panel.innerHTML = `
-      <span class="badge">Question</span>
-      <h2>${escapeHtml(card.title)}</h2>
-      <p class="ask">${escapeHtml(card.body)}</p>
-    `;
-  } else if (card.type === "practice") {
-    panel.innerHTML = `
-      <span class="badge">Practice</span>
-      <h2>${escapeHtml(card.title)}</h2>
-      <p>${escapeHtml(card.body)}</p>
-    `;
-  } else if (card.type === "prayer") {
-    panel.innerHTML = `
-      <span class="badge">Prayer</span>
-      <h2>${escapeHtml(card.title)}</h2>
-      <p>${escapeHtml(card.body)}</p>
-    `;
-  } else {
-    panel.innerHTML = `
-      <span class="badge">Reflect</span>
-      <h2>${escapeHtml(card.title)}</h2>
-      <p>${escapeHtml(card.body)}</p>
-    `;
-  }
-
-  section.appendChild(panel);
-  return section;
+function setStatus(message, isError = false) {
+  statusEl.textContent = message;
+  statusEl.classList.toggle("error", isError);
 }
 
 function escapeHtml(value) {
@@ -93,13 +44,73 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
+function renderCard(card, index) {
+  const section = document.createElement("section");
+  section.className = `card ${card.type || "text"}`;
+  section.dataset.index = String(index);
+  section.setAttribute("aria-label", `${index + 1} of ${cards.length}`);
+
+  const panel = document.createElement("div");
+  panel.className = "card-panel";
+  const type = card.type || "text";
+
+  if (type === "cover") {
+    panel.innerHTML = `
+      <span class="kicker">${escapeHtml(card.kicker || "VirtueOS")}</span>
+      <h1>${escapeHtml(card.title || "Pathway")}</h1>
+      <p>${escapeHtml(card.body || "")}</p>
+      <p class="cta">${escapeHtml(card.cta || "Swipe up")}</p>
+    `;
+  } else if (type === "quote") {
+    panel.innerHTML = `
+      <span class="badge">Quote</span>
+      <blockquote>${escapeHtml(card.text || card.body || "")}</blockquote>
+      <cite>${escapeHtml(card.cite || "")}</cite>
+    `;
+  } else if (type === "scripture") {
+    panel.innerHTML = `
+      <span class="badge">Scripture</span>
+      <blockquote>${escapeHtml(card.text || card.body || "")}</blockquote>
+      <p class="ref">${escapeHtml(card.ref || "")}</p>
+      ${card.question ? `<p class="ask">${escapeHtml(card.question)}</p>` : ""}
+    `;
+  } else if (type === "question") {
+    panel.innerHTML = `
+      <span class="badge">Question</span>
+      <h2>${escapeHtml(card.title || "Question")}</h2>
+      <p class="ask">${escapeHtml(card.body || "")}</p>
+    `;
+  } else if (type === "practice") {
+    panel.innerHTML = `
+      <span class="badge">Practice</span>
+      <h2>${escapeHtml(card.title || "Practice")}</h2>
+      <p>${escapeHtml(card.body || "")}</p>
+    `;
+  } else if (type === "prayer") {
+    panel.innerHTML = `
+      <span class="badge">Prayer</span>
+      <h2>${escapeHtml(card.title || "Prayer")}</h2>
+      <p>${escapeHtml(card.body || "")}</p>
+    `;
+  } else {
+    panel.innerHTML = `
+      <span class="badge">Reflect</span>
+      <h2>${escapeHtml(card.title || "Card")}</h2>
+      <p>${escapeHtml(card.body || card.text || "")}</p>
+    `;
+  }
+
+  section.appendChild(panel);
+  return section;
+}
+
 function renderProgress() {
   progress.innerHTML = cards
     .map((_, i) => `<span class="${i <= activeIndex ? "on" : ""}"></span>`)
     .join("");
   progress.setAttribute(
     "aria-valuenow",
-    String(Math.round(((activeIndex + 1) / cards.length) * 100))
+    String(Math.round(((activeIndex + 1) / Math.max(cards.length, 1)) * 100))
   );
 }
 
@@ -121,6 +132,8 @@ function syncActiveFromScroll() {
 }
 
 function wireRail() {
+  if (railWired) return;
+  railWired = true;
   document.querySelectorAll(".rail-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const action = btn.dataset.action;
@@ -134,50 +147,110 @@ function wireRail() {
         return;
       }
       if (action === "share") {
-        const card = cards[activeIndex];
-        const text = card?.title || card?.text || "VirtueOS pathway";
-        if (navigator.share) {
-          navigator.share({ title: "VirtueOS", text }).catch(() => {
-            showToast("Share canceled");
-          });
-        } else {
-          showToast("Share coming with publish");
-        }
+        showToast("Share coming with publish");
       }
     });
   });
 }
 
-async function boot() {
-  const res = await fetch(pathwayUrl);
-  if (!res.ok) throw new Error(`Failed to load pathway (${res.status})`);
-  const pathway = await res.json();
+function showReader(pathway) {
   cards = pathway.cards || [];
-
+  activeIndex = 0;
   feed.innerHTML = "";
   cards.forEach((card, index) => feed.appendChild(renderCard(card, index)));
   renderProgress();
   wireRail();
+  feed.scrollTop = 0;
+
+  importView.hidden = true;
+  readerView.hidden = false;
+  feed.focus();
+}
+
+function showImport() {
+  readerView.hidden = true;
+  importView.hidden = false;
+}
+
+async function importFromUrl(url) {
+  setStatus("Fetching feed…");
+  const res = await fetch(`/api/feed?url=${encodeURIComponent(url)}`);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `Import failed (${res.status})`);
+  const pathway = rssToPathway(data.xml, url);
+  setStatus(`Imported ${pathway.cards.length - 1} items from feed.`);
+  showReader(pathway);
+}
+
+async function importSampleRss() {
+  setStatus("Loading sample RSS…");
+  const res = await fetch("./feeds/sample-parents-ai.xml");
+  if (!res.ok) throw new Error("Could not load sample feed");
+  const xml = await res.text();
+  const pathway = rssToPathway(xml, "./feeds/sample-parents-ai.xml");
+  setStatus(`Sample feed → ${pathway.cards.length - 1} cards.`);
+  showReader(pathway);
+}
+
+async function importStubJson() {
+  setStatus("Loading stub pathway JSON…");
+  const res = await fetch("./pathways/parents-church-ai.json");
+  if (!res.ok) throw new Error("Could not load stub pathway");
+  const pathway = await res.json();
+  setStatus(`Stub pathway → ${pathway.cards.length} cards.`);
+  showReader(pathway);
+}
+
+function boot() {
+  document.getElementById("btn-import").addEventListener("click", async () => {
+    const url = feedUrlInput.value.trim();
+    if (!url) {
+      setStatus("Paste a feed URL first.", true);
+      return;
+    }
+    try {
+      await importFromUrl(url);
+    } catch (err) {
+      setStatus(err.message || String(err), true);
+    }
+  });
+
+  document.getElementById("btn-sample").addEventListener("click", async () => {
+    try {
+      await importSampleRss();
+    } catch (err) {
+      setStatus(err.message || String(err), true);
+    }
+  });
+
+  document.getElementById("btn-stub").addEventListener("click", async () => {
+    try {
+      await importStubJson();
+    } catch (err) {
+      setStatus(err.message || String(err), true);
+    }
+  });
+
+  document.getElementById("btn-back").addEventListener("click", showImport);
 
   feed.addEventListener("scroll", () => syncActiveFromScroll(), { passive: true });
 
-  // Keyboard for desktop browser testing
   window.addEventListener("keydown", (event) => {
+    if (readerView.hidden) return;
     if (event.key === "ArrowDown" || event.key === "j") {
       event.preventDefault();
-      feed.querySelector(`[data-index="${Math.min(activeIndex + 1, cards.length - 1)}"]`)
+      feed
+        .querySelector(`[data-index="${Math.min(activeIndex + 1, cards.length - 1)}"]`)
         ?.scrollIntoView({ behavior: "smooth" });
     }
     if (event.key === "ArrowUp" || event.key === "k") {
       event.preventDefault();
-      feed.querySelector(`[data-index="${Math.max(activeIndex - 1, 0)}"]`)
+      feed
+        .querySelector(`[data-index="${Math.max(activeIndex - 1, 0)}"]`)
         ?.scrollIntoView({ behavior: "smooth" });
     }
+    if (event.key === "Escape") showImport();
   });
 }
 
-boot().catch((err) => {
-  feed.innerHTML = `<section class="card"><div class="card-panel"><h2>Could not load pathway</h2><p>${escapeHtml(
-    err.message
-  )}</p></div></section>`;
-});
+boot();

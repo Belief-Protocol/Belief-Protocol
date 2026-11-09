@@ -1,0 +1,13 @@
+{
+  "name": "virtueos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first feed reader that turns feeds into virtue pathways",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

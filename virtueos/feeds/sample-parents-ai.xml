@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:v="https://virtueos.org/ns/pathway/1.0">
+  <channel>
+    <title>Sample: Parents and the Church on AI</title>
+    <link>https://virtueos.org/pathways/parents-church-ai</link>
+    <description>Sample RSS used to test feed → pathway conversion. Placeholder items only.</description>
+    <v:pathway kind="essay" virtue="prudence" cadence="daily" length="5"/>
+    <item>
+      <title>Why this belongs at home</title>
+      <link>https://virtueos.org/pathways/parents-church-ai#1</link>
+      <description>PLACEHOLDER. The Church asks parents to treat AI as a formation issue, not only a tech issue.</description>
+      <v:card type="text">{"title":"Why this belongs at home","body":"PLACEHOLDER. The Church asks parents to treat AI as a formation issue, not only a tech issue."}</v:card>
+    </item>
+    <item>
+      <title>A line to sit with</title>
+      <link>https://virtueos.org/pathways/parents-church-ai#2</link>
+      <description>PLACEHOLDER QUOTE. Scientific and technological advances should serve the human person and the common good.</description>
+      <v:card type="quote">{"text":"PLACEHOLDER QUOTE. Scientific and technological advances should serve the human person and the common good.","cite":"Church teaching on AI · stub"}</v:card>
+    </item>
+    <item>
+      <title>Tonight at the table</title>
+      <link>https://virtueos.org/pathways/parents-church-ai#3</link>
+      <description>Ask: Where did you use a screen or AI today — and did it help you become more truthful, patient, or distracted?</description>
+      <v:card type="question">{"title":"Tonight at the table","body":"Ask: Where did you use a screen or AI today — and did it help you become more truthful, patient, or distracted?"}</v:card>
+    </item>
+    <item>
+      <title>One house rule</title>
+      <link>https://virtueos.org/pathways/parents-church-ai#4</link>
+      <description>Write one family AI rule this week and put it where everyone can see it.</description>
+      <v:card type="practice">{"title":"One house rule","body":"Write one family AI rule this week and put it where everyone can see it."}</v:card>
+    </item>
+    <item>
+      <title>Close in prayer</title>
+      <link>https://virtueos.org/pathways/parents-church-ai#5</link>
+      <description>PLACEHOLDER PRAYER. Lord, give us wisdom of heart as we guide our children. Amen.</description>
+      <v:card type="prayer">{"title":"Close in prayer","body":"PLACEHOLDER PRAYER. Lord, give us wisdom of heart as we guide our children. Amen."}</v:card>
+    </item>
+  </channel>
+</rss>
