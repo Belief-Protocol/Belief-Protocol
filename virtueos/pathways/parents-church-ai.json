@@ -1,0 +1,77 @@
+{
+  "id": "parents-church-ai",
+  "title": "Leading Your Family Through the Church on AI",
+  "subtitle": "A short pathway for parents",
+  "kind": "essay",
+  "audience": "parents",
+  "cadence": "daily",
+  "length": 10,
+  "virtue": "prudence",
+  "sourceNote": "PLACEHOLDER — replace card bodies with approved citations from the Church’s AI teaching (e.g. Antiqua et Nova and related papal addresses). Stub copy is for UX testing only.",
+  "license": "CC BY-SA 4.0",
+  "cards": [
+    {
+      "id": "cover",
+      "type": "cover",
+      "title": "Leading Your Family Through the Church on AI",
+      "kicker": "VirtueOS · Parents",
+      "body": "Ten short cards to help you walk your household through the Church’s teaching on artificial intelligence. Placeholder text — real citations come next.",
+      "cta": "Swipe up to begin"
+    },
+    {
+      "id": "why",
+      "type": "text",
+      "title": "Why this matters at home",
+      "body": "PLACEHOLDER. The Church asks parents, teachers, and pastors to take AI seriously as a formation issue — not only a tech issue. Your family is the first school where children learn what tools are for."
+    },
+    {
+      "id": "quote-wisdom",
+      "type": "quote",
+      "text": "PLACEHOLDER QUOTE. “Scientific and technological advances should be directed toward serving the human person and the common good.”",
+      "cite": "Church teaching on AI · stub citation"
+    },
+    {
+      "id": "human-not-tool",
+      "type": "text",
+      "title": "Persons are not tools",
+      "body": "PLACEHOLDER. AI can assist learning and work. It cannot replace the relationship between parent and child, or teacher and student. Lead with presence first; tools second."
+    },
+    {
+      "id": "question-table",
+      "type": "question",
+      "title": "Tonight at the table",
+      "body": "Ask one question: “Where did you use a screen or an AI helper today — and did it help you become more truthful, more patient, or more distracted?”"
+    },
+    {
+      "id": "practice-rules",
+      "type": "practice",
+      "title": "Practice: one house rule",
+      "body": "PLACEHOLDER PRACTICE. Write one family rule for AI this week (example: “No AI writes your homework; AI may explain a step if a parent is present”). Put it on the fridge."
+    },
+    {
+      "id": "scripture",
+      "type": "scripture",
+      "ref": "Philippians 4:8 (placeholder pairing)",
+      "text": "Whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is lovely, whatever is gracious… think about these things.",
+      "question": "How will we judge AI suggestions by this measure in our home?"
+    },
+    {
+      "id": "attention",
+      "type": "text",
+      "title": "Guard attention",
+      "body": "PLACEHOLDER. Formation fails when desire is trained only for what machines can give. Help children practice boredom, reading, and unfinished questions without an instant answer."
+    },
+    {
+      "id": "prayer",
+      "type": "prayer",
+      "title": "A short prayer for parents",
+      "body": "PLACEHOLDER PRAYER. Lord, give us wisdom of heart. Teach us to guide our children with courage and gentleness, that every tool in our home would serve love of God and neighbor. Amen."
+    },
+    {
+      "id": "close",
+      "type": "text",
+      "title": "What to do next",
+      "body": "PLACEHOLDER CLOSE. Re-read one short section of the Church’s AI document this week. Share one paragraph with your spouse or co-parent. Come back tomorrow for the next card once real pathway content replaces these stubs."
+    }
+  ]
+}

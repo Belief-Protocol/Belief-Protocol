@@ -1,0 +1,69 @@
+<!-- Snapshot fixture from https://github.blog/feed/atom/ (trimmed to 3 entries for offline tests). -->
+<?xml version="1.0" encoding="UTF-8"?><feed
+	xmlns="http://www.w3.org/2005/Atom"
+	xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xml:lang="en-US"
+	>
+	<title type="text">The GitHub Blog</title>
+	<subtitle type="text">Updates, ideas, and inspiration from GitHub to help developers build and design software.</subtitle>
+
+	<updated>2026-11-06T22:16:01Z</updated>
+
+	<link rel="alternate" type="text/html" href="https://github.blog/" />
+	<id>https://github.blog/feed/atom/</id>
+	<link rel="self" type="application/atom+xml" href="https://github.blog/all.atom" />
+
+	<generator uri="https://wordpress.org/" version="7.1.4">WordPress</generator>
+<icon>https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=32%2C32</icon>
+	<entry>
+		<author>
+			<name>Nick Liffen</name>
+					</author>
+
+		<title type="html"><![CDATA[Beyond code generation: A developer&#8217;s guide to agentic engineering]]></title>
+		<link rel="alternate" type="text/html" href="https://github.blog/ai-and-ml/github-copilot/beyond-code-generation-a-developers-guide-to-agentic-engineering/" />
+
+		<id>https://github.blog/?p=100047</id>
+		<updated>2026-11-06T22:16:01Z</updated>
+		<published>2026-11-06T22:15:59Z</published>
+		<category scheme="https://github.blog/" term="AI &amp; ML" /><category scheme="https://github.blog/" term="GitHub Copilot" /><category scheme="https://github.blog/" term="GitHub Universe" />
+		<summary type="html"><![CDATA[Writing code got faster. The work around it didn't. See how you can plan, write code, review changes, and investigate production issues with GitHub Copilot, and what work still needs your judgment. The post Beyond code generation: A developer&#8217;s guide to agentic engineering appeared first on The GitHub Blog . ]]>]]></summary>
+
+					<content type="html" xml:base="https://github.blog/ai-and-ml/github-copilot/beyond-code-generation-a-developers-guide-to-agentic-engineering/"><![CDATA[This October, GitHub saw more than 1.2 billion commits in one week&mdash;over 400% more than a year earlier. This is more commits than GitHub received in all of 2025. Chances are, you&rsquo;re generating more code than you were a year ago. But ask yourself: do you feel 400% more productive than you were last year? Building software takes more than a good prompt. As AI speeds up implementation, software developers are feeling more pressure in other places: a Faros AI study found that pull request]]></content>
+		
+			</entry>
+<entry>
+		<author>
+			<name>Karthik Raman</name>
+					</author>
+
+		<title type="html"><![CDATA[Inside GitHub&#8217;s new Git storage architecture]]></title>
+		<link rel="alternate" type="text/html" href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/" />
+
+		<id>https://github.blog/?p=100002</id>
+		<updated>2026-11-05T20:23:25Z</updated>
+		<published>2026-11-05T20:23:21Z</published>
+		<category scheme="https://github.blog/" term="Architecture &amp; optimization" /><category scheme="https://github.blog/" term="Engineering" /><category scheme="https://github.blog/" term="Git" /><category scheme="https://github.blog/" term="Infrastructure" /><category scheme="https://github.blog/" term="technical deep dive" />
+		<summary type="html"><![CDATA[GitHub's new Git storage architecture is built so thousands of agents can push to a single repository at once. Here's how it works. The post Inside GitHub&#8217;s new Git storage architecture appeared first on The GitHub Blog . ]]>]]></summary>
+
+					<content type="html" xml:base="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/"><![CDATA[Last week at GitHub Universe, we announced our new Git storage architecture, capable of handling thousands of writes per second with reads that scale on demand. Through internal testing, we&rsquo;ve demonstrated the ability to support 5,000 concurrent agents working on a repository, sending 7,200 pushes per second to a repo, all while serving read traffic with consistently low latency. This new architecture is the foundation for GitHub to support agentic development for hundreds of millions of d]]></content>
+		
+			</entry>
+<entry>
+		<author>
+			<name>Jan Maarten</name>
+					</author>
+
+		<title type="html"><![CDATA[Accessibility statements now have a home on GitHub]]></title>
+		<link rel="alternate" type="text/html" href="https://github.blog/open-source/maintainers/accessibility-statements-now-have-a-home-on-github/" />
+
+		<id>https://github.blog/?p=99949</id>
+		<updated>2026-11-05T18:34:47Z</updated>
+		<published>2026-11-05T16:00:00Z</published>
+		<category scheme="https://github.blog/" term="Maintainers" /><category scheme="https://github.blog/" term="Open Source" /><category scheme="https://github.blog/" term="accessibility" /><category scheme="https://github.blog/" term="community health files" /><category scheme="https://github.blog/" term="maintainers" /><category scheme="https://github.blog/" term="open source" /><category scheme="https://github.blog/" term="repositories" />
+		<summary type="html"><![CDATA[GitHub now highlights ACCESSIBILITY.md files and helps maintainers document accessibility goals, known barriers, supported environments, contributor expectations, and reporting processes. The post Accessibility statements now have a home on GitHub appeared first on The GitHub Blog . ]]>]]></summary>
+
+					<content type="html" xml:base="https://github.blog/open-source/maintainers/accessibility-statements-now-have-a-home-on-github/"><![CDATA[Accessibility work often lives in issue trackers, contribution guidelines, audit reports, team knowledge, and conversations with users. When that information has no predictable home, people who encounter a barrier must search for it, and maintainers lose context as contributors and project ownership change. An ACCESSIBILITY.md file, now visible on repository overview pages, gives a project one durable place to explain its accessibility goals, contributor expectations, supported environments, kno]]></content>
+		
+			</entry>
+</feed>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0a2540" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>VirtueOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="import" class="import" aria-label="Import a feed">
+        <div class="import-panel">
+          <p class="kicker">VirtueOS</p>
+          <h1>Turn a feed into a pathway</h1>
+          <p class="import-lead">
+            Paste a feed URL or raw RSS/Atom XML, or open the sample pathway.
+            Design is temporary — the conversion loop is the point.
+          </p>
+
+          <label class="field">
+            <span>Feed URL</span>
+            <input
+              id="feed-url"
+              type="url"
+              placeholder="https://example.com/feed.xml"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </label>
+
+          <label class="field">
+            <span>Or paste feed XML</span>
+            <textarea
+              id="feed-xml"
+              rows="4"
+              placeholder="&lt;rss&gt;… or &lt;feed&gt;…"
+              spellcheck="false"
+            ></textarea>
+          </label>
+
+          <div class="import-actions">
+            <button type="button" id="btn-import" class="btn primary">
+              Import feed
+            </button>
+            <button type="button" id="btn-sample" class="btn">
+              Sample RSS
+            </button>
+            <button type="button" id="btn-stub" class="btn">
+              Stub pathway JSON
+            </button>
+          </div>
+
+          <p id="import-status" class="import-status" role="status"></p>
+        </div>
+      </section>
+
+      <div id="reader" class="reader" hidden>
+        <header class="topchrome" aria-label="VirtueOS reader">
+          <div class="brand">
+            <button type="button" id="btn-back" class="back">Feeds</button>
+            <span class="brand-mark">VirtueOS</span>
+          </div>
+          <div
+            id="progress"
+            class="progress"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </header>
+
+        <main id="feed" class="feed" tabindex="0" aria-label="Pathway feed"></main>
+
+        <aside class="rail" aria-label="Card actions">
+          <button type="button" class="rail-btn" data-action="save" title="Save">
+            <span class="rail-icon" aria-hidden="true">＋</span>
+            <span>Save</span>
+          </button>
+          <button type="button" class="rail-btn" data-action="note" title="Note">
+            <span class="rail-icon" aria-hidden="true">✎</span>
+            <span>Note</span>
+          </button>
+          <button type="button" class="rail-btn" data-action="share" title="Share">
+            <span class="rail-icon" aria-hidden="true">↗</span>
+            <span>Share</span>
+          </button>
+        </aside>
+      </div>
+
+      <div id="toast" class="toast" hidden></div>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
