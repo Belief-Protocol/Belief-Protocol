@@ -7,6 +7,7 @@ const progress = document.getElementById("progress");
 const toast = document.getElementById("toast");
 const statusEl = document.getElementById("import-status");
 const feedUrlInput = document.getElementById("feed-url");
+const feedXmlInput = document.getElementById("feed-xml");
 
 let cards = [];
 let activeIndex = 0;
@@ -172,14 +173,29 @@ function showImport() {
   importView.hidden = false;
 }
 
-async function importFromUrl(url) {
-  setStatus("Fetching feed…");
-  const res = await fetch(`/api/feed?url=${encodeURIComponent(url)}`);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || `Import failed (${res.status})`);
-  const pathway = rssToPathway(data.xml, url);
+function importFromXml(xml, sourceLabel) {
+  const pathway = rssToPathway(xml, sourceLabel);
   setStatus(`Imported ${pathway.cards.length - 1} items from feed.`);
   showReader(pathway);
+}
+
+async function importFromUrl(url) {
+  setStatus("Fetching feed…");
+  let res;
+  try {
+    res = await fetch(url, {
+      headers: {
+        Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+      },
+    });
+  } catch {
+    throw new Error(
+      "Could not fetch that URL from the browser (often CORS). Paste the feed XML below instead."
+    );
+  }
+  if (!res.ok) throw new Error(`Import failed (${res.status})`);
+  const xml = await res.text();
+  importFromXml(xml, url);
 }
 
 async function importSampleRss() {
@@ -203,12 +219,17 @@ async function importStubJson() {
 
 function boot() {
   document.getElementById("btn-import").addEventListener("click", async () => {
+    const xml = feedXmlInput.value.trim();
     const url = feedUrlInput.value.trim();
-    if (!url) {
-      setStatus("Paste a feed URL first.", true);
-      return;
-    }
     try {
+      if (xml) {
+        importFromXml(xml, "pasted-feed");
+        return;
+      }
+      if (!url) {
+        setStatus("Paste a feed URL or feed XML first.", true);
+        return;
+      }
       await importFromUrl(url);
     } catch (err) {
       setStatus(err.message || String(err), true);

@@ -24,9 +24,8 @@
           <p class="kicker">VirtueOS</p>
           <h1>Turn a feed into a pathway</h1>
           <p class="import-lead">
-            Paste an RSS or Atom URL, load the sample feed, or open the stub
-            parents pathway. Design is temporary — the conversion loop is the
-            point.
+            Paste a feed URL or raw RSS/Atom XML, or open the sample pathway.
+            Design is temporary — the conversion loop is the point.
           </p>
 
           <label class="field">
@@ -38,6 +37,16 @@
               autocomplete="off"
               spellcheck="false"
             />
+          </label>
+
+          <label class="field">
+            <span>Or paste feed XML</span>
+            <textarea
+              id="feed-xml"
+              rows="4"
+              placeholder="&lt;rss&gt;… or &lt;feed&gt;…"
+              spellcheck="false"
+            ></textarea>
           </label>
 
           <div class="import-actions">

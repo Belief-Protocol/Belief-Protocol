@@ -23,10 +23,10 @@ npm start
 
 Open `http://127.0.0.1:8765`.
 
-- Paste an RSS/Atom URL → **Import feed**
+- Paste an RSS/Atom URL or raw feed XML → **Import feed**
 - Or **Sample RSS** / **Stub pathway JSON**
 
-The local server exposes `GET /api/feed?url=` so the browser can fetch remote feeds without CORS issues.
+Remote URLs are fetched in the browser. If CORS blocks a feed, paste the XML instead.
 
 ## Test
 
