@@ -3,13 +3,14 @@
  * Minimal VirtueOS local daemon spike.
  * Serves the reader and fetches remote feeds so the browser can turn RSS/Atom into pathways.
  */
-const http = require("http");
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
-const { URL } = require("url");
+import http from "node:http";
+import https from "node:https";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { URL } from "node:url";
 
-const ROOT = __dirname;
+const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 8765);
 const HOST = process.env.HOST || "127.0.0.1";
 
@@ -19,6 +20,8 @@ const MIME = {
   ".css": "text/css; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
+  ".rss": "application/rss+xml; charset=utf-8",
+  ".atom": "application/atom+xml; charset=utf-8",
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".ico": "image/x-icon",
@@ -54,7 +57,7 @@ function fetchText(targetUrl, redirects = 0) {
     let parsed;
     try {
       parsed = new URL(targetUrl);
-    } catch (err) {
+    } catch {
       reject(new Error("Invalid URL"));
       return;
     }
@@ -68,7 +71,8 @@ function fetchText(targetUrl, redirects = 0) {
       {
         headers: {
           "User-Agent": "VirtueOS/0.1 (+local feed import)",
-          Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+          Accept:
+            "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
         },
         timeout: 15000,
       },
